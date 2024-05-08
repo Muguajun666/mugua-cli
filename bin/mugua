@@ -1,0 +1,72 @@
+#!/usr/bin/env node
+
+/**
+ * Check version
+ */
+const checker = require('../lib/checker');
+
+if (!checker.checkNode()) {
+  process.exit(1);
+}
+checker.checkUpgrade();
+
+const chalk = require('chalk');
+const pkg = require('../package.json');
+const didYouMean = require('didyoumean');
+
+didYouMean.threshold = 0.6;
+
+/**
+ * Parse Commands
+ */
+
+const program = require('commander');
+
+program
+  .usage('<command> [options]')
+  .version(pkg.version)
+  // Project commands
+  .command('init [name]', `Initialize a kind of template`)
+  .command('list', `List templates`)
+  .command('serve [dir]', `server built by local static folder`)
+  .command('gitsync', `sync vue project dist folder to egg project public`)
+  .command('publish <version>', 'Publish a new version')
+  .command('screenshot <url|local-file>', 'Take a screenshot of a web page')
+  .command('ghpages', 'Push a directory to gh-pages');
+
+// output help information on unknown commands
+program.on('command:*', ([cmd]) => {
+  const avaliableCommands = program.commands.map((cmd) => cmd._name);
+
+  if (avaliableCommands.includes(cmd)) {
+    return;
+  }
+
+  program.outputHelp();
+  console.error();
+  console.error();
+  console.error(`  ` + chalk.red(`Unknown command ${chalk.yellow(cmd)}.`));
+  suggestCommands(cmd, avaliableCommands);
+});
+
+const oldOutputHelp = program.outputHelp;
+program.outputHelp = function (cb) {
+  oldOutputHelp.call(program, (text) => {
+    const colored = text
+      .replace(/^Usage: (.+)\n/gm, (m, $1) => 'Usage: ' + chalk.cyan($1) + '\n')
+      .replace(/^ {2}(\w+)/gm, (m, $1) => '  ' + chalk.yellow($1));
+    const more = `\n  Run ${chalk.cyan(
+      `mugua <command> --help`
+    )} for detailed usage of given command.\n`;
+    const result = colored + more;
+    return cb ? cb(result) : result;
+  });
+};
+
+function suggestCommands(unknownCommand, avaliableCommands) {
+  const suggestion = didYouMean(unknownCommand, avaliableCommands);
+  if (suggestion) {
+    console.error(`  ` + chalk.red(`Did you mean ${chalk.yellow(suggestion)}?`));
+  }
+}
+program.parse(process.argv);

@@ -12,6 +12,6 @@ git add -A
 git commit -m "$msg"
 echo 'local commited'
 
-git push -f https://github.com/Muguajun666/mugua-cli.git main
+git push -f https://github.com/Muguajun666/mugua-cli.git master
 echo 'remote commited'
 # cd -

@@ -1,13 +1,13 @@
 {
   "name": "mugua-cli",
-  "version": "1.0.7",
-  "description": "init project from cli tool",
-  "main": "index.js",
+  "version": "1.1.0",
+  "description": "CLI for Project",
   "bin": {
-    "mugua": "./index.js"
+    "mugua": "bin/mugua"
   },
   "scripts": {
     "github": "sh deploy.sh",
+    "dev": "./bin/mugua",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -19,12 +19,19 @@
   ],
   "license": "MIT",
   "homepage": "https://github.com/Muguajun666/mugua-cli#readme",
+  "engines": {
+    "node": ">=8"
+  },
   "dependencies": {
     "chalk": "^2.4.1",
+    "commander": "^5.1.0",
+    "didyoumean": "^1.2.2",
     "figlet": "^1.7.0",
     "git-clone": "^0.2.0",
     "inquirer": "^6.2.1",
     "ora": "^4.0.3",
-    "shelljs": "^0.8.5"
+    "semver": "^7.3.2",
+    "shelljs": "^0.8.5",
+    "update-notifier": "^4.1.0"
   }
 }
