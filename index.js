@@ -53,40 +53,6 @@ const create = ({ project, template }) => {
   });
 };
 
-// program
-//   .version(version)
-//   .description('mugua-cli: my cli program')
-// program
-//   .command('* <tpl> <project>')
-//   .action(function(template, project) {
-//     log.info('follow is format command for mugua-cli')
-//     log.info('mugua-cli vue/vue-ts/koa-ts/tool-ts/website/electron/mini-app my-project')
-
-//     if (!projectMap[template]) {
-//       log.error('such template is not exist')
-//       return
-//     }
-
-//     if (!project) {
-//       log.warn('please input your project name')
-//     }
-
-//     const { url, description } = projectMap[template]
-//     log.info(`url: ${url}`)
-//     log.info(`description: ${description}`)
-
-//     let pwd = shell.pwd()
-
-//     log.info(`download template project code, full path: ${pwd}/${project}/ ...`)
-//     clone(url, pwd + `/${project}`, null, function() {
-//         shell.rm('-rf', pwd + `/${project}/.git`)
-//         log.info('project is finished')
-//     })
-//   })
-// program
-//   .parse(process.argv)
-
-
 try {
   run()
 } catch (error) {
