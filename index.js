@@ -4,6 +4,7 @@ const shell = require('shelljs');
 const inquirer = require('inquirer');
 const chalk = require('chalk');
 const figlet = require('figlet');
+const ora = require('ora');
 
 const projectMap = require('./lib/config');
 const version = require('./package.json').version;
@@ -44,18 +45,22 @@ const askQuestions = () => {
 };
 
 const create = ({ project, template }) => {
+  const spinner = ora('downloading template');
+  spinner.start();
+
   const pwd = shell.pwd();
-  const dest = `${pwd}/${project}`
-  const { url, description } = projectMap[template]
-  console.log(chalk.yellow(description))
+  const dest = `${pwd}/${project}`;
+  const { url, description } = projectMap[template];
+  console.log(chalk.yellow(` ${description}`));
   clone(url, dest, null, function () {
+    spinner.stop();
     shell.rm('-rf', dest + '/.git');
-    console.log(chalk.white.bgGreen.bold(`Done! project created at ${dest}`))
+    console.log(chalk.white.bgGreen.bold(`Done! project created at ${dest}`));
   });
 };
 
 try {
-  run()
+  run();
 } catch (error) {
-  console.log(chalk.red(error))
+  console.log(chalk.red(error));
 }
