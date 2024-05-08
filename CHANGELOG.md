@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.1.2](https://github.com/Muguajun666/mugua-cli/compare/v1.1.1...v1.1.2) (2024-05-08)
+
+
+### Features
+
+* add list ([84aba40](https://github.com/Muguajun666/mugua-cli/commit/84aba4004b523384a28178d42aeb11cbda278e99))
+
 ### 1.1.1 (2024-05-08)
 
 
