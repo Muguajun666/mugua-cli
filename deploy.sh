@@ -1,0 +1,17 @@
+#!/usr/bin/env sh
+
+# 确保脚本抛出遇到的错误
+set -e
+
+# Commit changes.
+msg="deploy at `date`"
+if [ $# != 0 ]
+  then msg="$*"
+fi
+git add -A
+git commit -m "$msg"
+echo 'local commited'
+
+git push -f https://github.com/Muguajun666/mugua-cli.git main
+echo 'remote commited'
+# cd -
