@@ -45,11 +45,12 @@ const askQuestions = () => {
 
 const create = ({ project, template }) => {
   const pwd = shell.pwd();
+  const dest = `${pwd}/${project}`
   const { url, description } = projectMap[template]
   console.log(chalk.yellow(description))
-  clone(url, pwd + `/${project}`, null, function () {
-    shell.rm('-rf', pwd + `/${project}/.git`);
-    console.log(chalk.green('project is finished'))
+  clone(url, dest, null, function () {
+    shell.rm('-rf', dest + '/.git');
+    console.log(chalk.white.bgGreen.bold(`Done! project created at ${dest}`))
   });
 };
 
